@@ -1,6 +1,7 @@
 package com.airvwweb.springboot.domain.posts;
 
 //import com.airvwweb.springboot.domain.BaseTimeEntity;
+import com.airvwweb.springboot.domain.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,7 +18,7 @@ import javax.persistence.Id;
 // @Enitity: 테이블과 링크될 클래스임을 나타냄. 언더스코어 네이밍(_)으로 매칭 ex) SalesManger.java -> sales_manager table
 @Entity
 // 실제 DB의 테이블과 매칭될 클래스, Entity 클래스 -> Request/Response 클래스로 사용해서는 안됨
-public class Posts {
+public class Posts extends BaseTimeEntity {
 
 //    해당 테이블의 PK필드를 나타냄
     @Id
