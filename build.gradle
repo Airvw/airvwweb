@@ -32,4 +32,5 @@ dependencies {
 //    h2 : 인메모리 관계형 데이터베이스. 메모리에서 실생 -> 재시작할 때마다 초기화 -> jpa 테스트 용도
     compile('com.h2database:h2')
     testCompile('org.springframework.boot:spring-boot-starter-test')
+    compile('org.springframework.boot:spring-boot-starter-mustache')
 }

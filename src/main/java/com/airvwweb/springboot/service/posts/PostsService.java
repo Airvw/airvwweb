@@ -2,13 +2,18 @@ package com.airvwweb.springboot.service.posts;
 
 import com.airvwweb.springboot.domain.posts.Posts;
 import com.airvwweb.springboot.domain.posts.PostsRepository;
+import com.airvwweb.springboot.web.dto.PostsListResponseDto;
 import com.airvwweb.springboot.web.dto.PostsResponseDto;
 import com.airvwweb.springboot.web.dto.PostsSaveRequestDto;
 import com.airvwweb.springboot.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 @RequiredArgsConstructor
 @Service
@@ -40,6 +45,16 @@ public class PostsService {
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습닌다. id=" + id));
 
         return new PostsResponseDto(entity);
+    }
+
+//    조회 기능만 가능해서 조회 속도 개선
+    @Transactional(readOnly = true)
+    public List<PostsListResponseDto> findAllDesc(){
+        return postsRepository.findAllDesc().stream()
+//                .map(posts -> new PostsListResponseDto(posts))
+//                postsRepository 결과로 넘어온 Posts의 Stream을 map을 통해 PostsListResponseDto로 변환
+                .map(PostsListResponseDto::new)
+                .collect(Collectors.toList());
     }
 }
 
