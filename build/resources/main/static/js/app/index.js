@@ -1,14 +1,21 @@
-// 변수 main을 function으로 작성한 이유 : 함수 이름이 중복되어 index.js만의 유효범위를 만들어 주기 위해서.
-// index 객체 안에서만 function이 유효
 var main = {
     init : function(){
         var _this = this;
         $('#btn-save').on('click', function(){
             _this.save();
         });
+
+//        btn-update란 id를 가진 html 엘리먼트에 click 이벤트가 발생할 때 update function을 실행하도록 이벤트를 등록
+        $('#btn-update').on('click', function(){
+            _this.update();
+        });
+
+        $('#btn-delete').on('click', function(){
+            _this.delete();
+        });
     },
-    save : function(){
-        var data={
+    save : function () {
+        var data = {
             title: $('#title').val(),
             author: $('#author').val(),
             content: $('#content').val()
@@ -18,13 +25,50 @@ var main = {
             type: 'POST',
             url: '/api/v1/posts',
             dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
+            contentType:'application/json; charset=utf-8',
             data: JSON.stringify(data)
-        }).done(function(){
+        }).done(function() {
             alert('글이 등록되었습니다.');
-//            글 등록이 성공하면 메인페이지('/')로 이동동
-           window.location.href='/';
-        }).fail(function(error){
+            window.location.href = '/';
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    },
+
+    update : function () {
+        var data = {
+            title: $('#title').val(),
+            content: $('#content').val()
+        };
+
+        var id = $('#id').val();
+
+        $.ajax({
+            type: 'PUT',
+            url: '/api/v1/posts/'+id,
+            dataType: 'json',
+            contentType:'application/json; charset=utf-8',
+            data: JSON.stringify(data)
+        }).done(function() {
+            alert('글이 수정되었습니다.');
+            window.location.href = '/';
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    },
+
+    delete : function () {
+        var id = $('#id').val();
+
+        $.ajax({
+            type: 'DELETE',
+            url: '/api/v1/posts/'+id,
+            dataType: 'json',
+            contentType:'application/json; charset=utf-8'
+        }).done(function() {
+            alert('글이 삭제되었습니다.');
+            window.location.href = '/';
+        }).fail(function (error) {
             alert(JSON.stringify(error));
         });
     }
