@@ -1,5 +1,7 @@
 package com.airvwweb.springboot.config.auth;
 
+import com.airvwweb.springboot.config.auth.dto.OAuthAttributes;
+import com.airvwweb.springboot.config.auth.dto.SessionUser;
 import com.airvwweb.springboot.domain.user.User;
 import com.airvwweb.springboot.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
