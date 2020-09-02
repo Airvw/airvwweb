@@ -46,16 +46,17 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 //        SessionUser : 세션에 사용자 정보를 저장하기 위한 Dto 클래스
 //        User 클래스를 쓰지 않는 이유 -> User클래스에 직렬화를 구현하지 않았다. User클래스가 엔티티이기 때문
 //        엔티티 클래스는 언제 다른 엔티티와 관계가 형성될 지 모르기 때문에 직렬화 기능을 가진 세션 Dto를 추가
+//        OAuthAttributes 클래스 생성이 끝났으면 같은 패키지에 SessionUser클래스를 생성.
         httpSession.setAttribute("user", new SessionUser(user));
 
         return new DefaultOAuth2User(Collections.singleton(new SimpleGrantedAuthority(user.getRoleKey())),
                 attributes.getAttributes(),
                 attributes.getNameAttributeKey());
     }
-
     private User saveOrUpdate(OAuthAttributes attributes){
         User user = userRepository.findByEmail(attributes.getEmail())
                 .map(entity -> entity.update(attributes.getName(), attributes.getPicture()))
+//                userRepository에서 이메일을 못찾으면 엔티티를 생성해준다.(처음 가입)
                 .orElse(attributes.toEntity());
 
         return  userRepository.save(user);
