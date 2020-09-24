@@ -32,6 +32,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 //        현재 로그인 진행 중인 서비스를 구분하는 코드
 //        구글만 사용하기에 불필요하지만 이후 네이버 로그인 연동 시에 네이버인지 구글인지 구분하기 위해 사용
         String registrationId = userRequest.getClientRegistration().getRegistrationId();
+
 //        OAuth2 로그인 진행시 키가 되는 필드값. PK(Primary Key)와 같은 의미
 //        구글의 경우 기본 코드를 지원하지만, 네이버 카카오는 기본 코드를 지원하지 않는다.
 //        네이버, 구글 로그인을 동시에 지원할 때 사용

@@ -6,10 +6,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 
 // JPA Auditiong 활성화 어노테이션
-@EnableJpaAuditing
+// @EnableJpaAuditing   p221
 @SpringBootApplication
 public class Application {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
 }
